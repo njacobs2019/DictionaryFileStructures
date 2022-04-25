@@ -1,4 +1,4 @@
-public class WordNode({
+public class WordNode{
 	private String name;
 	private String pos;
 	private String definition;
