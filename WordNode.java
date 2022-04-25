@@ -4,7 +4,7 @@ public class WordNode{
 	private String definition;
 	WordNode next;
 
-	public WordNode(String inName, String inPos, String inDefn){
+	public WordNode(String inName, String inPos, String inDef){
 		this.name = inName;
 		this.pos = inPos;
 		this.definition = inDef;
