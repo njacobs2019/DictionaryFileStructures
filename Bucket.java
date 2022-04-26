@@ -27,8 +27,47 @@ public class Bucket{
     	}
     }
 
+    static int compare(String a, String b){
+    	int min = a.length();
+
+    	if(b.length() < min){
+    		min = b.length();
+    	}
+
+    	for(int i = 0; i < min; i++){
+    		if(a.charAt(i) < b.charAt(i)){
+    			return -1;
+    		}
+    		if(a.charAt(i) > b.charAt(i)){
+    			return 1;
+    		}
+    	}
+    	return 0;
+    }
+
 	//insert with internal or leaf override
 
+    Boolean Insert(WordNode w, Bucket p){
+    	for(int i = 0; i < BSize; i++){
+    		if(word[i] == null){
+    			word[i] = w;
+    			b[i+1] = p;
+    			BSize++;
+    			break;
+    		}
+    		if(compare(w.getName(), word[i].getName()) == 1){
+    			shiftRight(i);
+    			word[i] = w;
+    			b[i+1] = p;
+    			BSize++;
+    			break;
+    		}
+    	}
+    	if(word[max] != null){
+    		return true;
+    	}
+    	return false;
+    }
 
 
 	BBucket findNext(int n){
@@ -42,4 +81,12 @@ public class Bucket{
 
 
 	//tostring testing visualization return string of words in bucket
+	@Override
+	public String toString(){
+		String buc = "";
+		for(int i = 0; i < BSize; i++){
+			buc += word[i].getName();
+		}
+		return buc;
+	}
 }
