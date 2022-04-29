@@ -58,7 +58,7 @@ public class Bucket{
 	    			BSize++;
 	    			break;
 	    		}
-	    		if(compare(w.getName(), word[i].getName()) == 1){
+	    		if(compare(w.getName(), word[i].getName()) == 0){
 	    			shiftRight(i);
 	    			word[i] = w;
 	    			b[i+1] = p;
@@ -74,7 +74,7 @@ public class Bucket{
 	    			BSize++;
 	    			break;
 	    		}
-	    		if(compare(w.getName(), word[i].getName()) == 1){
+	    		if(compare(w.getName(), word[i].getName()) == 0){
 	    			shiftRight(i);
 	    			word[i] = w;
 	    			BSize++;
@@ -89,9 +89,9 @@ public class Bucket{
     }
 
 
-	BBucket findNext(int n){
+	BBucket findNext(String n){
         for(int i=0; i < this.BSize; i++){
-            if(n < this.word[i].getData()){
+            if(compare(n, this.word[i].getName()) == 0){
                 return this.b[i];
             }
         }

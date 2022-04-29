@@ -17,6 +17,17 @@ public class BPlusTree.java{
 		}
 		else{
 			Bucket p = root;
+			if(p.isLeaf == true){
+				Boolean flag = p.Insert(n, null);
+				while(flag == true){
+					flag = split(p);
+					p = p.parent;
+				}
+				return;
+			}
+			else{
+				p = p.findNext(inName);
+			}
 		}
 	}
 }
