@@ -4,13 +4,15 @@ public class Bucket{
 	Bucket parent;
 	int BSize;
 	int max;
+	Boolean isLeaf = null;
 
-	Bucket(int max){
+	Bucket(int max, Boolean isLeaf){
 		BSize = 0;
 		word = null;
 		b = new Bucket[max+1];
 		this.max = max;
 		parent = null;
+		this.isLeaf = isLeaf;
 	}
 
 	void shiftRight(int x){
@@ -48,21 +50,38 @@ public class Bucket{
 	//insert with internal or leaf override
 
     Boolean Insert(WordNode w, Bucket p){
-    	for(int i = 0; i < BSize; i++){
-    		if(word[i] == null){
-    			word[i] = w;
-    			b[i+1] = p;
-    			BSize++;
-    			break;
-    		}
-    		if(compare(w.getName(), word[i].getName()) == 1){
-    			shiftRight(i);
-    			word[i] = w;
-    			b[i+1] = p;
-    			BSize++;
-    			break;
-    		}
-    	}
+	    if(isLeaf == false){
+	    	for(int i = 0; i < BSize; i++){
+	    		if(word[i] == null){
+	    			word[i] = w;
+	    			b[i+1] = p;
+	    			BSize++;
+	    			break;
+	    		}
+	    		if(compare(w.getName(), word[i].getName()) == 1){
+	    			shiftRight(i);
+	    			word[i] = w;
+	    			b[i+1] = p;
+	    			BSize++;
+	    			break;
+	    		}
+	    	}
+	    }
+	    else{
+	    	for(int i = 0; i < BSize; i++){
+	    		if(word[i] == null){
+	    			word[i] = w;
+	    			BSize++;
+	    			break;
+	    		}
+	    		if(compare(w.getName(), word[i].getName()) == 1){
+	    			shiftRight(i);
+	    			word[i] = w;
+	    			BSize++;
+	    			break;
+	    		}
+	    	}
+	    }
     	if(word[max] != null){
     		return true;
     	}
