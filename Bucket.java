@@ -1,7 +1,7 @@
 public class Bucket{
 	WordList word[];
 	Bucket b[];
-	Bucket parent;
+	Bucket parent, right, left;
 	int BSize;
 	int max;
 	Boolean isLeaf = null;
@@ -12,6 +12,8 @@ public class Bucket{
 		b = new Bucket[max+1];
 		this.max = max;
 		parent = null;
+		right = null;
+		left = null;
 		this.isLeaf = isLeaf;
 	}
 
