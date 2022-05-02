@@ -80,8 +80,12 @@ public class BPlusTree.java{
 	}
 
 	Boolean Steal(Bucket p){
-		
+		Boolean flag = false;
+		int min = b.max/2;
+		//find way to steal to the right if leaf and up if internal
 	}
+
+	//function that checks value at parent to check if it needs updating and to update if needed
 
 	public WordNode Search(String name){
 
