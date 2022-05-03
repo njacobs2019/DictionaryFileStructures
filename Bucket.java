@@ -93,7 +93,7 @@ public class Bucket{
 
 	BBucket findNext(String n){
         for(int i=0; i < this.BSize; i++){
-            if(compare(n, this.word[i].getName()) == 0){
+            if(compare(n, this.word[i].getName()) == -1){
                 return this.b[i];
             }
         }
