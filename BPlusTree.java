@@ -127,7 +127,9 @@ public class BPlusTree.java{
 					p.left.word[BSize-1] = null;
 					p.left.BSize -= 1;
 					internalUpdate(p.word[0]);
-					if(p.left.BSize < min)
+					if(p.left.BSize < min){
+						p = p.left;
+					}
 				}
 			}
 		}
