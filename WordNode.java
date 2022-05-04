@@ -2,7 +2,7 @@ public class WordNode{
 	private String name;
 	private String pos;
 	private String definition;
-	WordNode next;
+	public WordNode next;
 
 	public WordNode(String inName, String inPos, String inDef){
 		this.name = inName;
@@ -15,8 +15,16 @@ public class WordNode{
 		return this.name;
 	}
 
-	// other get methods
+	public String getPos(){
+		return this.pos;
+	}
 
-	// toString method
+	public String getDef(){
+		return this.definition;
+	}
 
+	@Override
+	public String toString(){
+		return String.format("(%s) %s\n",pos,definition);
+	}
 }
