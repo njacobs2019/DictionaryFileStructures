@@ -25,6 +25,6 @@ public class WordNode{
 
 	@Override
 	public String toString(){
-		return String.format("(%s) %s\n",pos,definition);
+		return String.format("(%s) %s",pos,definition);
 	}
 }
