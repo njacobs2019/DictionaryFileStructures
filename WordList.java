@@ -1,3 +1,5 @@
+// This class holds a single word and all of its definitions.
+
 public class WordList{
 	private String name;
 	private WordNode head;
