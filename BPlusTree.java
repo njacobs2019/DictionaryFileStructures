@@ -78,7 +78,19 @@ public class BPlusTree.java{
 	}
 
 	public void Remove(String name){
-
+		while(true){
+			Bucket p = root;
+			while(true){
+				for(int i = 0; i < p.BSize - 1; i++){
+					if(p.compare(name, p.word[i].getName()) == 0){
+						p.shiftLeft(i);
+						if(p.BSize < min) Steal(p);
+						return;
+					}
+				}
+				else p = p.findNext(name);
+			}
+		}
 	}
 
 	Boolean Steal(Bucket p){
@@ -102,9 +114,12 @@ public class BPlusTree.java{
 						break;
 					}
 				}
-				if(p.parent.BSize < min){
+				if(p.parent.BSize < min && p != root){
 					p = p.parent;
 					Steal(p);
+				}
+				if(p.parent.BSize < min && p.parent == root){
+					return;
 				}
 			}
 			if(p.parent.BSize > min || p.parent == null) break;
