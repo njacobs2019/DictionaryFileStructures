@@ -7,9 +7,7 @@ public class BPlusTree.java{
 		this.max = max;
 	}
 
-	public void add(String inName, String inPos, String inDef){
-		WordNode n = new WordNode(inName, inPos, inDef);
-
+	public void add(WordNode n){
 		if(root == null){
 			root = new Bucket(max, true);
 			root.BSize = 1;
