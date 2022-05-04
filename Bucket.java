@@ -7,7 +7,7 @@ public class Bucket{
 	Boolean isLeaf = null;
 
 	public Bucket(int max, Boolean isLeaf){
-		BSize = 0;
+		this.BSize = 0;
 		word = new WordList[max];
 		b = new Bucket[max+1];
 		this.max = max;
