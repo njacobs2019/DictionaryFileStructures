@@ -144,6 +144,7 @@ public class BPlusTree.java{
 					internalUpdate(p.word[0]);
 					if(p.left.BSize < min){
 						p = p.left;
+						Steal(p);
 					}
 				}
 			}
