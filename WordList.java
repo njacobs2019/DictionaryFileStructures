@@ -3,7 +3,7 @@
 public class WordList{
 	private String name;
 	private WordNode head;
-	private int length;
+	private int length;    // How many definitions this word has.
 
 	public WordList(String inName){
 		this.name = inName;
