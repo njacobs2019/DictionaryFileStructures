@@ -11,6 +11,10 @@ public class WordNode{
 		this.next = null;
 	}
 
+	// public WordNode(String input){
+		
+	// }
+
 	public String getName(){
 		return this.name;
 	}
