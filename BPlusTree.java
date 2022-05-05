@@ -29,7 +29,6 @@ public class BPlusTree{
 		}
 	}
 
-
 	public void printAll(){
 		// This function prints the entire dictionary
 		Bucket start = this.root;
@@ -51,9 +50,6 @@ public class BPlusTree{
 		while(!temp.isLeaf()){
 			temp = temp.findNext(name);
 		}
-
-		System.out.format("Returned bucket: %s\n",temp);
-
 		return temp;
 	}
 
