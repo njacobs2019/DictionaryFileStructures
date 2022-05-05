@@ -4,9 +4,9 @@ public class Bucket{
 	public Bucket parent, right, left;
 	public int BSize;
 	public int max;
-	public Boolean isLeaf = null;
+	public Boolean isLeaf;
 
-	public Bucket(int max, Boolean isLeaf){
+	public Bucket(int max){
 		this.BSize = 0;
 		word = new WordList[max];
 		b = new Bucket[max+1];
@@ -14,7 +14,7 @@ public class Bucket{
 		parent = null;
 		right = null;
 		left = null;
-		this.isLeaf = isLeaf;
+		this.isLeaf = true;
 	}
 
 	// Tested!
@@ -136,11 +136,12 @@ public class Bucket{
                 return this.b[i];
             }
         }
-        return this.b[this.BSize];
+        return this.b[this.BSize];             // Nate thinks this might point to a null
     }
 
     // Prints everything for debugging purposes
 	public void debug_print(){
+		System.out.format("Bucket hash:  %s\n",System.identityHashCode(this));
 		System.out.format("max_degree:  %d\n", this.max);
 		System.out.format("size:  %d\n", this.BSize);
 		System.out.format("parent:  %d\n", System.identityHashCode(this.parent));
@@ -163,11 +164,20 @@ public class Bucket{
 
 	@Override
   	public String toString(){
-    	String out = "*";
+    	String out;
+  		if(this.isLeaf)
+  			out = "^";
+  		else
+  			out = "*";
+
     	for(int i=0; i<BSize; i++){
     		out += "["+word[i].getName()+"]";
     	}
-    	out = out + "*";
+    	
+    	if(this.isLeaf)
+  			out = out + "^";
+  		else
+  			out = out + "*";
     	return out;
   	}
 }

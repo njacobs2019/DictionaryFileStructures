@@ -6,7 +6,7 @@ public class Bucket_Tester{
 
 
 	public static void testToString(){
-		Bucket b = new Bucket(5,false);
+		Bucket b = new Bucket(5);
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
 		WordNode def3 = new WordNode("Aardvark", "adv.", "Behind, in the rear.");
@@ -23,11 +23,11 @@ public class Bucket_Tester{
 	}
 
 	public static void testFindNext(){
-		Bucket b = new Bucket(5,false);
-		Bucket c = new Bucket(5,false);
-		Bucket d = new Bucket(5,false);
-		Bucket e = new Bucket(5,false);
-		Bucket f = new Bucket(5,false);
+		Bucket b = new Bucket(5);
+		Bucket c = new Bucket(5);
+		Bucket d = new Bucket(5);
+		Bucket e = new Bucket(5);
+		Bucket f = new Bucket(5);
 
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
@@ -48,9 +48,9 @@ public class Bucket_Tester{
 	}
 
 	public static void testShiftLeft(){
-		Bucket b = new Bucket(5,false);
-		Bucket c = new Bucket(5,false);
-		Bucket d = new Bucket(5,false);
+		Bucket b = new Bucket(5);
+		Bucket c = new Bucket(5);
+		Bucket d = new Bucket(5);
 
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
@@ -66,9 +66,9 @@ public class Bucket_Tester{
 	}
 
 	public static void testShiftRight(){
-		Bucket b = new Bucket(5,false);
-		Bucket c = new Bucket(5,false);
-		Bucket d = new Bucket(5,false);
+		Bucket b = new Bucket(5);
+		Bucket c = new Bucket(5);
+		Bucket d = new Bucket(5);
 
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
@@ -84,9 +84,9 @@ public class Bucket_Tester{
 	}
 
 	public static void testInsert(){
-		Bucket b = new Bucket(5,false);
-		Bucket c = new Bucket(5,false);
-		Bucket d = new Bucket(5,false);
+		Bucket b = new Bucket(5);
+		Bucket c = new Bucket(5);
+		Bucket d = new Bucket(5);
 
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
@@ -107,9 +107,9 @@ public class Bucket_Tester{
 
 	// Tests overloaded insert with the wordlist
 	public static void testInsertWL(){
-		Bucket b = new Bucket(5,false);
-		Bucket c = new Bucket(5,false);
-		Bucket d = new Bucket(5,false);
+		Bucket b = new Bucket(5);
+		Bucket c = new Bucket(5);
+		Bucket d = new Bucket(5);
 
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
 		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");

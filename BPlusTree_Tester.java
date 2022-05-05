@@ -12,7 +12,7 @@ public class BPlusTree_Tester{
 		//Initializes file reader
 		File f = new File("Dataset.tsv");
 
-		BPlusTree tree = new BPlusTree(5);
+		BPlusTree tree = new BPlusTree(3);
 		WordNode n;
 
 		try{
@@ -20,18 +20,23 @@ public class BPlusTree_Tester{
 			String line;
 			line = scan.nextLine();  // Reads in the first line of column labels
 			
+			// while(scan.hasNext()){
 			for(int i=0; i<20; i++){
 				line = scan.nextLine();
-				
-				n = new WordNode(line);
-
-				System.out.format("Adding:  %s\n",n.getName());
-
-				tree.add(n);
+				System.out.print("BFS:  ");
 				tree.printBFS();
-				System.out.println();
+				System.out.println();				
+				n = new WordNode(line);
+				System.out.format("i %d\n",i);
+				tree.add(n);
 			}
 
+
+			tree.printBFS();
+			tree.printAll();
+			System.out.println();
+
+			
 			scan.close();
 		}
 		catch(FileNotFoundException e){

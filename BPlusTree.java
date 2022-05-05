@@ -11,6 +11,7 @@ public class BPlusTree{
 		System.out.println("B+ tree created with max size " + max);
 	}
 
+	// Works!
 	public void printBFS(){
 		Queue<Bucket> q = new LinkedList<>();
 		q.add(root);
@@ -19,6 +20,8 @@ public class BPlusTree{
 			current = q.poll();
 			if(current!=null){
 				System.out.print(current);
+				//current.debug_print();
+				System.out.println();
 				for(int i=0; i<this.max; i++){
 					q.add(current.b[i]);
 				}
@@ -26,15 +29,36 @@ public class BPlusTree{
 		}
 	}
 
+
+	public void printAll(){
+		// This function prints the entire dictionary
+		Bucket start = this.root;
+
+		while(start.b[0]!=null){
+			start = start.b[0];
+		}
+
+		for(Bucket temp=start; temp!=null; temp = temp.right){
+			System.out.println(temp);
+		}
+
+		// Loop through all buckets
+			// loop through the bucket
+
+	}
+
+	// Works!
 	public void add(WordNode n){
 		if(root == null){
-			root = new Bucket(max, true);
+			root = new Bucket(max);
 			root.insert(n,null);
 		}
 		else{
 			Bucket p = root;
 			while(true){
-				if(p.isLeaf == true){
+				System.out.println("p:  ");
+				System.out.println(p);
+				if(p.isLeaf == true){                    // isLeaf could be incorrect.  If a leaf says it is not a leaf, the code goes below it.
 					Boolean flag = p.insert(n, null);
 					if(flag){
 						split(p);
@@ -48,14 +72,13 @@ public class BPlusTree{
 		}
 	}
 
-	// Seems to work on single levels
+	// Works!
 	public void split(Bucket p){
 		int mid;              // Index of middle element
 		Bucket other_p;       // New bucket
 		boolean flag = true;  // Tracks if we need to keep splitting up the tree.  Assumes true at first.
 		int left;             // Elements to right of mid
 		int right;            // Elements to left of mid
-
 
 		// System.out.print("b:  ");
 		// System.out.print(b);
@@ -66,6 +89,7 @@ public class BPlusTree{
 		// System.out.println();
 
 		while(flag){
+			System.out.println("SPLIT LOOP");
 			// Error check that b is not null;
 			if(p==null){
 				System.out.println("\n\nERROR:  Tried splitting a null bucket.");
@@ -77,7 +101,8 @@ public class BPlusTree{
 			left = mid;
 			right = this.max-left;
 
-			other_p = new Bucket(this.max, p.isLeaf);         // Creates the new bucket
+			other_p = new Bucket(this.max);         // Creates the new bucket
+			other_p.isLeaf = p.isLeaf;
 
 			//adjust left and right pointers
 			if(p.isLeaf){
@@ -92,9 +117,10 @@ public class BPlusTree{
 
 			//Handles case where p is the root
 			if(p.parent == null){
-				this.root = new Bucket(this.max, false);
+				this.root = new Bucket(this.max);
 				this.root.b[0] = p;
 				p.parent = this.root;
+				p.parent.isLeaf = false;
 			}
 			
 			flag = p.parent.insert(p.word[mid], other_p);
@@ -107,6 +133,11 @@ public class BPlusTree{
 				other_p.b[i] = p.b[i+mid+1];
 				p.b[i+mid+1] = null;
 			}
+
+			// if(!other_p.isLeaf){
+			// 	// delete first node and shift left
+			// 	other_p.shiftLeft(0);
+			// }
 
 			other_p.b[i] = p.b[max];
 			p.b[max] = null;
