@@ -28,6 +28,6 @@ public class Reader_Tester{
 		}
 		catch(FileNotFoundException e){
 			System.out.format("The file \"%s\" was not found.\n", filename);
-		}	
+		}
 	}
 }
