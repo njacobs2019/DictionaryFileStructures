@@ -126,4 +126,14 @@ public class Bucket{
 		}
 		System.out.println("\n*****\n");
 	}
+
+	@Override
+  	public String toString(){
+    	String out = "*";
+    	for(int i=0; i<BSize; i++){
+    		out += "["+word[i].getName()+"]";
+    	}
+    	out = out + "*";
+    	return out;
+  	}
 }

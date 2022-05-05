@@ -1,7 +1,25 @@
 public class Bucket_Tester{
 
 	public static void main(String[] args){
-		testFindNext();
+		testToString();
+	}
+
+
+	public static void testToString(){
+		Bucket b = new Bucket(5,false);
+		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
+		WordNode def2 = new WordNode("Before", "adv.", "Behind, in the rear.");
+		WordNode def3 = new WordNode("Aardvark", "adv.", "Behind, in the rear.");
+		WordNode def4 = new WordNode("Zebra", "adv.", "Behind, in the rear.");
+
+		b.insert(def1,null);
+		b.insert(def2,null);
+		b.insert(def3,null);
+		b.insert(def4,null);
+
+		System.out.println(b);
+
+
 	}
 
 	public static void testFindNext(){
