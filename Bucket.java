@@ -61,6 +61,33 @@ public class Bucket{
     	return 0;
     }
 
+    // Only to be called from split function
+    // Tested!
+    public Boolean insert(WordList l, Bucket p){
+    	for(int i = 0; i <= BSize; i++){
+    		// Reaches null, it is end of bucket, insert
+    		if(word[i] == null){
+    			word[i] = l;
+    			b[i+1] = p;
+    			BSize++;
+    			break;
+    		}
+    		// If current position is bigger than w, shift and insert
+    		else if(compare(l.getName(), word[i].getName()) == -1){
+    			shiftRight(i);
+    			word[i] = l;
+    			b[i+1] = p;
+    			BSize++;
+    			break;
+    		}
+    	}
+
+    	// If BSize is equal to max, the bucket is full
+    	// If bucket is full and we need to split
+    	return (this.BSize == this.max);
+    }
+
+
     // Tested!
     public Boolean insert(WordNode w, Bucket p){
     	for(int i = 0; i <= BSize; i++){
