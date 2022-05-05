@@ -1,7 +1,7 @@
 public class Bucket_Tester{
 
 	public static void main(String[] args){
-		testToString();
+		testShiftLeft();
 	}
 
 	public static void testCompare(){
@@ -63,7 +63,7 @@ public class Bucket_Tester{
 		System.out.println(b.insert(def3,null));
 
 		b.debug_print();
-		b.shiftLeft(1);
+		b.shiftLeft(0);
 		b.debug_print();
 	}
 
