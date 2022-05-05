@@ -50,7 +50,49 @@ public class BPlusTree{
 		while(!temp.isLeaf()){
 			temp = temp.findNext(name);
 		}
-		return temp;
+
+		// verify that it is in the bucket
+		for(int i=0; i<temp.BSize; i++){
+			if(temp.word[i].getName().equals(name)){
+				return temp;
+			}
+		}
+		return null;
+	}
+
+	public void partialPrint(String name, int num){
+		name = name.toLowerCase();
+		Bucket temp = search(name);
+
+		// Check if temp is null
+		if(temp==null){
+			System.out.println("This word is not in the dictionary.");
+			return;
+		}
+
+		// Find the index where the word is in the bucket
+		int index;
+		for(index=0; index<temp.BSize; index++){
+			if(temp.word[index].getName().equals(name)){
+				break;
+			}
+		}
+
+		for(int i=0; i<num; i++){
+			System.out.println(temp.word[index]);
+
+			index++;
+			// index exceeds bucket size, move to next bucket
+				// next bucket exists or not
+
+			if(index==temp.BSize){
+				index=0;
+				temp=temp.right;
+				if(temp==null){
+					break;
+				}
+			}
+		}
 	}
 
 	// Works!

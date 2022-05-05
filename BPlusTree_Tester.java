@@ -5,18 +5,32 @@ import java.io.FileNotFoundException;
 public class BPlusTree_Tester{
 
 	public static void main(String[] args){
-		searchTester();
+		testPartialPrint();
+	}
+
+	public static void testPartialPrint(){
+		BPlusTree tree = new BPlusTree(10);
+		fillTree(tree,1000);
+
+
+		System.out.println("Testing Partial Print with \"Abatis\" and 3");
+		tree.partialPrint("Abatis",3);
+
+		System.out.println("\n\nTesting Partial Print with \"Abide\" and 20");
+		tree.partialPrint("Abide",20);
 	}
 
 	public static void searchTester(){
 		BPlusTree tree = new BPlusTree(3);
-		fillTree(tree);
+		fillTree(tree,20);
 
 		System.out.println(tree.search("aard-wolf"));
+		System.out.println(tree.search("Hello"));
+		System.out.println(tree.search("aazaz"));
 	}
 
 
-	public static void fillTree(BPlusTree t){
+	public static void fillTree(BPlusTree t, int count){
 		//Initializes file reader
 		File f = new File("Dataset.tsv");
 		WordNode n;
@@ -27,7 +41,7 @@ public class BPlusTree_Tester{
 			line = scan.nextLine();  // Reads in the first line of column labels
 			
 			// while(scan.hasNext()){
-			for(int i=0; i<20; i++){
+			for(int i=0; i<count; i++){
 				line = scan.nextLine();
 				n = new WordNode(line);
 				t.add(n);
