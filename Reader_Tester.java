@@ -10,23 +10,24 @@ public class Reader_Tester{
 		//Initializes file reader
 		File f = new File(filename);
 
-		// //Try catch in case the file the program reads from is invalid in any way.
-		// try{
-		// 	Scanner scan = new Scanner(f);
-		// 	String line;
-		// 	//Reads through the file that stores all the usernames and adds the usernames to the linked list
-		// 	while(scan.hasNext()){
-		// 		line = scan.nextLine();
-		// 		this.myData.add(new User(line));
-		// 	}
-		// 	scan.close();
-		// }
-		// catch(FileNotFoundException e){
-		// 	System.out.format("The file \"%s\" was not found.\n", filename);
-		// }
+		WordNode n;
 
-
-
-		
+		//Try catch in case the file the program reads from is invalid in any way.
+		try{
+			Scanner scan = new Scanner(f);
+			String line;
+			//Reads through the file that stores all the usernames and adds the usernames to the linked list
+			while(scan.hasNext()){
+				line = scan.nextLine();
+				n = new WordNode(line);
+				System.out.print(n.getName());
+				System.out.print(":  ");
+				System.out.println(n);
+			}
+			scan.close();
+		}
+		catch(FileNotFoundException e){
+			System.out.format("The file \"%s\" was not found.\n", filename);
+		}	
 	}
 }
