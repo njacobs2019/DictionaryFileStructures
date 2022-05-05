@@ -1,10 +1,10 @@
 public class Bucket{
-	WordList word[];
-	Bucket b[];
-	Bucket parent, right, left;
-	int BSize;
-	int max;
-	Boolean isLeaf = null;
+	public WordList word[];
+	public Bucket b[];
+	public Bucket parent, right, left;
+	public int BSize;
+	public int max;
+	public Boolean isLeaf = null;
 
 	public Bucket(int max, Boolean isLeaf){
 		this.BSize = 0;
