@@ -20,11 +20,16 @@ public class BPlusTree_Tester{
 			String line;
 			line = scan.nextLine();  // Reads in the first line of column labels
 			
-			for(int i=0; i<10; i++){
+			for(int i=0; i<20; i++){
 				line = scan.nextLine();
+				
 				n = new WordNode(line);
+
+				System.out.format("Adding:  %s\n",n.getName());
+
 				tree.add(n);
 				tree.printBFS();
+				System.out.println();
 			}
 
 			scan.close();

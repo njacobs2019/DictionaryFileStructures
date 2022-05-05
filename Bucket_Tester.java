@@ -1,7 +1,7 @@
 public class Bucket_Tester{
 
 	public static void main(String[] args){
-		testInsertWL();
+		testFindNext();
 	}
 
 

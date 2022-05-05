@@ -20,9 +20,6 @@ public class Reader_Tester{
 			while(scan.hasNext()){
 				line = scan.nextLine();
 				n = new WordNode(line);
-				System.out.print(n.getName());
-				System.out.print(":  ");
-				System.out.println(n);
 			}
 			scan.close();
 		}
