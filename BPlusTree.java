@@ -3,7 +3,7 @@ import java.util.Queue;
 
 public class BPlusTree{
 	private int max;
-	private Bucket root;
+	private Bucket root, start;
 
 	public BPlusTree(int max){
 		this.max = max;
@@ -22,7 +22,7 @@ public class BPlusTree{
 				System.out.print(current);
 				//current.debug_print();
 				System.out.println();
-				for(int i=0; i<this.max; i++){
+				for(int i=0; i<current.BSize; i++){
 					q.add(current.b[i]);
 				}
 			}
@@ -116,44 +116,74 @@ public class BPlusTree{
 				this.root = new Bucket(this.max);
 				this.root.b[0] = p;
 				p.parent = this.root;
+				System.out.println(root.b[0]);
 			}
 			
 			flag = p.parent.insert(p.word[mid], other_p);
-
-			int i;
-			for(i=0; i<right; i++){
-				other_p.word[i] = p.word[i+mid];
-				p.word[i+mid] = null;
-
-				other_p.b[i] = p.b[i+mid+1];
-				p.b[i+mid+1] = null;
+			if(!p.isLeaf()){
+				p.word[mid] = null;
 			}
 
-			if(!other_p.isLeaf()){
-				// delete first node by shifting left
-				other_p.shiftLeft(0);
+			int i = 0;
+
+			if(!p.isLeaf()){
+				System.out.print("Splitting internal node");
+				other_p.b[0] = p.b[mid+1];
+				p.b[mid+1] = null;
+				if(other_p.b[0] != null){
+					other_p.b[0].parent = other_p;
+				}
+				for(i=0; i<right-1; i++){
+					other_p.word[i] = p.word[i+mid+1];
+					p.word[i+mid+1] = null;
+
+					other_p.b[i+1] = p.b[i+mid+2];
+					p.b[i+mid+2] = null;
+					if(other_p.b[i+1] != null){
+						other_p.b[i+1].parent = other_p;
+					}
+				}
+			}
+			else if(other_p.isLeaf()){
+				for(i=0; i<right; i++){
+					other_p.word[i] = p.word[i+mid];
+					p.word[i+mid] = null;
+				}
 			}
 
-			other_p.b[i] = p.b[max];
-			p.b[max] = null;
+
+			// if(!other_p.isLeaf()){
+			// 	// delete first node by shifting left
+			// 	other_p.shiftLeft(0);
+			// }
+
+			// other_p.b[i] = p.b[max];
+			// p.b[max] = null;
 
 			//Update sizes of the buckets
 			other_p.BSize = right;
 			p.BSize = left;
+			if(!other_p.isLeaf()){
+				other_p.BSize = right - 1;
+			}
 
 			//Update other_p's parent
 			other_p.parent = p.parent;
 
 			// Need to update other_p's children's parent pointer
-			Bucket temp;
-			for(int j=0; j<this.max+1; j++){
-				temp = other_p.b[i];
-				if(temp!=null){
-					temp.parent = other_p;
-				}
-			}
+			// Bucket temp;
+			// for(int j=0; j<this.max+1; j++){
+			// 	temp = other_p.b[i];
+			// 	if(temp!=null){
+			// 		temp.parent = other_p;
+			// 	}
+			// }
 
 			// Moves up a layer so we can repeat on parent if necessary
+			System.out.println(p);
+			System.out.println(p.parent);
+			System.out.println(other_p);
+			System.out.println();
 			p = p.parent;
 		}
 	}
