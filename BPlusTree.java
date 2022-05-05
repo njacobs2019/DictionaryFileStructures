@@ -1,161 +1,220 @@
-public class BPlusTree.java{
-	int max, i;
-	Bucket root = null;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BPlusTree{
+	private int max;
+	private Bucket root;
 
 	public BPlusTree(int max){
-		System.out.println("B+ tree created with max size " + max);
 		this.max = max;
+		this.root = null;
+		System.out.println("B+ tree created with max size " + max);
+	}
+
+	public void printBFS(){
+		Queue<Bucket> q = new LinkedList<>();
+		q.add(root);
+		Bucket current;
+		while(q.size()>0){
+			current = q.poll();
+			if(current!=null){
+				System.out.print(current);
+				for(int i=0; i<this.max; i++){
+					q.add(current.b[i]);
+				}
+			}
+		}
 	}
 
 	public void add(WordNode n){
 		if(root == null){
 			root = new Bucket(max, true);
-			root.BSize = 1;
-			root.word[0] = n;
+			root.insert(n,null);
 		}
 		else{
 			Bucket p = root;
 			while(true){
 				if(p.isLeaf == true){
-					Boolean flag = p.Insert(n, null);
-					while(flag == true){
-						flag = split(p);
-						p = p.parent;
+					Boolean flag = p.insert(n, null);
+					if(flag){
+						split(p);
 					}
 					return;
 				}
 				else{
-					p = p.findNext(inName);
+					p = p.findNext(n.getName());
 				}
 			}
 		}
 	}
 
-	Boolean Split(Bucket p){
-		Boolean flag = false;
-		while(true){
-			int mid = max/2;
+	// Seems to work on single levels
+	public void split(Bucket p){
+		int mid;              // Index of middle element
+		Bucket other_p;       // New bucket
+		boolean flag = true;  // Tracks if we need to keep splitting up the tree.  Assumes true at first.
+		int left;             // Elements to right of mid
+		int right;            // Elements to left of mid
+
+
+		// System.out.print("b:  ");
+		// System.out.print(b);
+		// System.out.println();
+
+		// System.out.print("b.parent:  ");
+		// System.out.print(b.parent);
+		// System.out.println();
+
+		while(flag){
+			// Error check that b is not null;
+			if(p==null){
+				System.out.println("\n\nERROR:  Tried splitting a null bucket.");
+				System.exit(1);
+			}
+
+			// Calculates sizes and mid index
+			mid = this.max/2;
+			left = mid;
+			right = this.max-left;
+
+			other_p = new Bucket(this.max, p.isLeaf);         // Creates the new bucket
+
+			//adjust left and right pointers
+			if(p.isLeaf){
+				other_p.right = p.right;
+				p.right = other_p;
+				other_p.left = p;
+
+				if(other_p.right!=null){
+					other_p.right.left = other_p;
+				}
+			}
+
+			//Handles case where p is the root
 			if(p.parent == null){
-				root = new Bucket(max, false);
-				root.b[0] = p;
-				p.parent = root;
+				this.root = new Bucket(this.max, false);
+				this.root.b[0] = p;
+				p.parent = this.root;
 			}
-			if(p.isLeaf == false){
-				Bucket other = new Bucket(max, false);
-				flag = p.parent.Insert(p.word[mid], other);
-				p.word[mid] = null;
-				other.b[0] = p.b[mid+1];
-				p.b[mid+1] = null;
-				for(int i = 0; i < mid, i++){
-					other.Insert(p.word[mid+i+1], p.b[mid+i+2]);
-					p.word[mid+i+1] = null; p.b[mid+i+2] = null;
-				}
-				other.parent = p.parent;
-				p.BSize = mid;
-				p = p.parent;
-			}
-			else{
-				Bucket other = new Bucket(max, true);
-				flag = p.parent.Insert(p.word[mid], other);
-				flag = other.Insert(p.word[mid], null);
-				p.word[mid] = null;
-				other.right = p.right;
-				other.left = p;
-				for(int i = 0; i < mid; i++){
-					other.Insert(p.word[mid+i+1], p.b[mid+i+2]);
-					p.word[mid+i+1] = null;
-				}
-				other.parent = p.parent;
-				p.right = other;
-				p.BSize = mid;
-				p = p.parent;
-			}
-			if(flag != true) break;
-		}
-		return false;
-	}
+			
+			flag = p.parent.insert(p.word[mid], other_p);
 
-	public void Remove(String name){
-		while(true){
-			Bucket p = root;
-			while(true){
-				for(int i = 0; i < p.BSize - 1; i++){
-					if(p.compare(name, p.word[i].getName()) == 0){
-						p.shiftLeft(i);
-						if(p.BSize < min) Steal(p);
-						return;
-					}
-				}
-				else p = p.findNext(name);
+			int i;
+			for(i=0; i<right; i++){
+
+				System.out.format("Right %d, i %d, mid %d\n",right,i,mid);
+				other_p.word[i] = p.word[i+mid];
+				p.word[i+mid] = null;
+
+				other_p.b[i] = p.b[i+mid+1];
+				p.b[i+mid+1] = null;
 			}
+
+			other_p.b[i] = p.b[max];
+			p.b[max] = null;
+
+			//Update sizes of the buckets
+			other_p.BSize = right;
+			p.BSize = left;
+
+			//Update other_p's parent
+			other_p.parent = p.parent;
+
+			// Need to update other_p's children's parent pointer
+			Bucket temp;
+			for(int j=0; j<this.max+1; j++){
+				temp = other_p.b[i];
+				if(temp!=null){
+					temp.parent = other_p;
+				}
+			}
+
+			// Moves up a layer so we can repeat on parent if necessary
+			p = p.parent;
 		}
 	}
 
-	Boolean Steal(Bucket p){
-		Boolean flag = false;
-		int min = p.max/2;
-		if(p.parent == null){
-			return false;
-		}
-		//find way to steal to the right if leaf and up if internal
-		if(p.isLeaf == false){
-			while(true){
-				int i = p.parent.BSize-1;
-				for(i >= 0; i--){
-					if(p.word[BSize].getName() < p.parent.word[i].getName()){
-						Bucket n = p.findNext(p.parent.word[i]);
-						p.Insert(p.parent.word[i], n);
-						p.parent.word[i] = null;
-						p.parent.BSize -= 1;
-						p.parent.shiftLeft(i);
-						if(p.parent.BSize = 0) p.parent = null;
-						break;
-					}
-				}
-				if(p.parent.BSize < min && p != root){
-					p = p.parent;
-					Steal(p);
-				}
-				if(p.parent.BSize < min && p.parent == root){
-					return;
-				}
-			}
-			if(p.parent.BSize > min || p.parent == null) break;
-		}
-		else{
-			while(true){
-				if(p.right != null){
-					p.Insert(p.right.word[0]);
-					p.right.word[0] = null;
-					p.right.shiftLeft(0);
-					p.right.BSize -= 1;
-					internalUpdate(p.right.word[0]);
-					if(p.right.BSize < min){
-						p = p.right;
-						Steal(p);
-					}
-				}
-				else if(p.left != null){
-					p.Insert(p.left.word[BSize-1]);
-					p.left.word[BSize-1] = null;
-					p.left.BSize -= 1;
-					internalUpdate(p.word[0]);
-					if(p.left.BSize < min){
-						p = p.left;
-						Steal(p);
-					}
-				}
-			}
-		}
-	}
+	// public void Remove(String name){
+	// 	while(true){
+	// 		Bucket p = root;
+	// 		while(true){
+	// 			for(int i = 0; i < p.BSize - 1; i++){
+	// 				if(p.compare(name, p.word[i].getName()) == 0){
+	// 					p.shiftLeft(i);
+	// 					if(p.BSize < min) Steal(p);
+	// 					return;
+	// 				}
+	// 			}
+	// 			else p = p.findNext(name);
+	// 		}
+	// 	}
+	// }
 
-	//function that checks value at parent to check if it needs updating and to update if needed
+	// Boolean Steal(Bucket p){
+	// 	Boolean flag = false;
+	// 	int min = p.max/2;
+	// 	if(p.parent == null){
+	// 		return false;
+	// 	}
+	// 	//find way to steal to the right if leaf and up if internal
+	// 	if(p.isLeaf == false){
+	// 		while(true){
+	// 			int i = p.parent.BSize-1;
+	// 			for(i >= 0; i--){
+	// 				if(p.word[BSize].getName() < p.parent.word[i].getName()){
+	// 					Bucket n = p.findNext(p.parent.word[i]);
+	// 					p.Insert(p.parent.word[i], n);
+	// 					p.parent.word[i] = null;
+	// 					p.parent.BSize -= 1;
+	// 					p.parent.shiftLeft(i);
+	// 					if(p.parent.BSize = 0) p.parent = null;
+	// 					break;
+	// 				}
+	// 			}
+	// 			if(p.parent.BSize < min && p != root){
+	// 				p = p.parent;
+	// 				Steal(p);
+	// 			}
+	// 			if(p.parent.BSize < min && p.parent == root){
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(p.parent.BSize > min || p.parent == null) break;
+	// 	}
+	// 	else{
+	// 		while(true){
+	// 			if(p.right != null){
+	// 				p.Insert(p.right.word[0]);
+	// 				p.right.word[0] = null;
+	// 				p.right.shiftLeft(0);
+	// 				p.right.BSize -= 1;
+	// 				internalUpdate(p.right.word[0]);
+	// 				if(p.right.BSize < min){
+	// 					p = p.right;
+	// 					Steal(p);
+	// 				}
+	// 			}
+	// 			else if(p.left != null){
+	// 				p.Insert(p.left.word[BSize-1]);
+	// 				p.left.word[BSize-1] = null;
+	// 				p.left.BSize -= 1;
+	// 				internalUpdate(p.word[0]);
+	// 				if(p.left.BSize < min){
+	// 					p = p.left;
+	// 					Steal(p);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	public void internalUpdate(String name){
+	// //function that checks value at parent to check if it needs updating and to update if needed
 
-	}
+	// public void internalUpdate(String name){
 
-	public WordNode Search(String name){
+	// }
 
-	}
+	// public WordNode Search(String name){
+
+	// }
 }
