@@ -5,7 +5,7 @@ public class WordNode{
 	public WordNode next;
 
 	public WordNode(String inName, String inPos, String inDef){
-		this.name = inName;
+		this.name = inName.toLowerCase();
 		this.pos = inPos;
 		this.definition = inDef;
 		this.next = null;
@@ -22,7 +22,12 @@ public class WordNode{
 			System.exit(1);
 		}
 
-		this.name = output[0];
+		// remove unprintable characters
+		output[0] = output[0].replaceAll("\\P{Print}","");
+		output[1] = output[1].replaceAll("\\P{Print}","");
+		output[2] = output[2].replaceAll("\\P{Print}","");
+
+		this.name = output[0].toLowerCase();
 		this.pos = output[1];
 		this.definition = output[2];
 		this.next = null;
