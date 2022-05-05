@@ -8,7 +8,13 @@ public class Bucket{
 	public Bucket(int max){
 		this.BSize = 0;
 		word = new WordList[max];
+		for(int j = 0; j < max; j++){
+			word[j] = null;
+		}
 		b = new Bucket[max+1];
+		for(int i = 0; i < max+1; i++){
+			b[i] = null;
+		}
 		this.max = max;
 		parent = null;
 		right = null;
