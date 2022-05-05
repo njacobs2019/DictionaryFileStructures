@@ -27,6 +27,7 @@ public class Bucket{
             word[i+1] = word[i];
             b[i+2] = b[i+1];
         }
+        this.BSize++;
     }
 
 	// Tested!
@@ -38,6 +39,7 @@ public class Bucket{
     		word[i] = word[i+1];
     		b[i+1] = b[i+2];
     	}
+    	this.BSize--;
     }
 
     // Tested!
@@ -83,10 +85,9 @@ public class Bucket{
     		}
     		// If current position is bigger than w, shift and insert
     		else if(compare(l.getName(), word[i].getName()) == -1){
-    			shiftRight(i);
+    			shiftRight(i);    // shiftRight increments BSize
     			word[i] = l;
     			b[i+1] = p;
-    			BSize++;
     			break;
     		}
     	}
@@ -110,11 +111,10 @@ public class Bucket{
     		}
     		// If current position is bigger than w, shift and insert
     		else if(compare(w.getName(), word[i].getName()) == -1){
-    			shiftRight(i);
+    			shiftRight(i);    // increments BSize
     			word[i] = new WordList(w.getName());
     			word[i].add(w);
-    			b[i+1] = p;
-    			BSize++;
+    			b[i+1] = p;;
     			break;
     		}
     		// if current position is same word, add new definition
@@ -138,7 +138,7 @@ public class Bucket{
                 return this.b[i];
             }
         }
-        return this.b[this.BSize];             // Nate thinks this might point to a null
+        return this.b[this.BSize-1];             // Nate thinks this might point to a null
     }
 
     // Prints everything for debugging purposes
