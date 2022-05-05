@@ -50,6 +50,8 @@ public class Bucket{
     		min = b.length();
     	}
 
+    	System.out.format("Min %d\n",min);
+
     	for(int i = 0; i < min; i++){
     		if(a.charAt(i) < b.charAt(i)){
     			return -1;
@@ -57,6 +59,13 @@ public class Bucket{
     		if(a.charAt(i) > b.charAt(i)){
     			return 1;
     		}
+    	}
+
+    	if(a.length()>b.length()){
+    		return 1;
+    	}
+    	else if(a.length()<b.length()){
+    		return -1;
     	}
     	return 0;
     }
