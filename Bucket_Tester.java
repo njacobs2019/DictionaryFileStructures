@@ -1,10 +1,14 @@
 public class Bucket_Tester{
 
 	public static void main(String[] args){
-		testFindNext();
+		testToString();
 	}
 
-
+	public static void testCompare(){
+		System.out.println(Bucket.compare("a","aa"));
+		System.out.println(Bucket.compare("aaa","aa"));
+	}
+	
 	public static void testToString(){
 		Bucket b = new Bucket(5);
 		WordNode def1 = new WordNode("Aback", "adv.", "Behind, in the rear.");
@@ -18,8 +22,6 @@ public class Bucket_Tester{
 		b.insert(def4,null);
 
 		System.out.println(b);
-
-
 	}
 
 	public static void testFindNext(){

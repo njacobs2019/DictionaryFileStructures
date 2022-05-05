@@ -4,7 +4,6 @@ public class Bucket{
 	public Bucket parent, right, left;
 	public int BSize;
 	public int max;
-	public Boolean isLeaf;
 
 	public Bucket(int max){
 		this.BSize = 0;
@@ -14,7 +13,10 @@ public class Bucket{
 		parent = null;
 		right = null;
 		left = null;
-		this.isLeaf = true;
+	}
+
+	public Boolean isLeaf(){
+		return b[0]==null;
 	}
 
 	// Tested!
@@ -165,7 +167,7 @@ public class Bucket{
 	@Override
   	public String toString(){
     	String out;
-  		if(this.isLeaf)
+  		if(isLeaf())
   			out = "^";
   		else
   			out = "*";
@@ -174,7 +176,7 @@ public class Bucket{
     		out += "["+word[i].getName()+"]";
     	}
     	
-    	if(this.isLeaf)
+    	if(isLeaf())
   			out = out + "^";
   		else
   			out = out + "*";
