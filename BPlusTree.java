@@ -58,7 +58,7 @@ public class BPlusTree{
 			while(true){
 				System.out.println("p:  ");
 				System.out.println(p);
-				if(p.isLeaf == true){                    // isLeaf could be incorrect.  If a leaf says it is not a leaf, the code goes below it.
+				if(p.isLeaf()){                    // isLeaf could be incorrect.  If a leaf says it is not a leaf, the code goes below it.
 					Boolean flag = p.insert(n, null);
 					if(flag){
 						split(p);
@@ -102,10 +102,9 @@ public class BPlusTree{
 			right = this.max-left;
 
 			other_p = new Bucket(this.max);         // Creates the new bucket
-			other_p.isLeaf = p.isLeaf;
 
 			//adjust left and right pointers
-			if(p.isLeaf){
+			if(p.isLeaf()){
 				other_p.right = p.right;
 				p.right = other_p;
 				other_p.left = p;
@@ -120,7 +119,6 @@ public class BPlusTree{
 				this.root = new Bucket(this.max);
 				this.root.b[0] = p;
 				p.parent = this.root;
-				p.parent.isLeaf = false;
 			}
 			
 			flag = p.parent.insert(p.word[mid], other_p);
@@ -134,7 +132,7 @@ public class BPlusTree{
 				p.b[i+mid+1] = null;
 			}
 
-			// if(!other_p.isLeaf){
+			// if(!other_p.isLeaf()){
 			// 	// delete first node and shift left
 			// 	other_p.shiftLeft(0);
 			// }
