@@ -56,8 +56,6 @@ public class BPlusTree{
 		else{
 			Bucket p = root;
 			while(true){
-				System.out.println("p:  ");
-				System.out.println(p);
 				if(p.isLeaf()){                    // isLeaf could be incorrect.  If a leaf says it is not a leaf, the code goes below it.
 					Boolean flag = p.insert(n, null);
 					if(flag){
@@ -89,7 +87,6 @@ public class BPlusTree{
 		// System.out.println();
 
 		while(flag){
-			System.out.println("SPLIT LOOP");
 			// Error check that b is not null;
 			if(p==null){
 				System.out.println("\n\nERROR:  Tried splitting a null bucket.");
@@ -132,10 +129,10 @@ public class BPlusTree{
 				p.b[i+mid+1] = null;
 			}
 
-			// if(!other_p.isLeaf()){
-			// 	// delete first node and shift left
-			// 	other_p.shiftLeft(0);
-			// }
+			if(!other_p.isLeaf()){
+				// delete first node by shifting left
+				other_p.shiftLeft(0);
+			}
 
 			other_p.b[i] = p.b[max];
 			p.b[max] = null;
