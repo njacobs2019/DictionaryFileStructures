@@ -101,8 +101,6 @@ public class BPlusTree{
 
 			int i;
 			for(i=0; i<right; i++){
-
-				System.out.format("Right %d, i %d, mid %d\n",right,i,mid);
 				other_p.word[i] = p.word[i+mid];
 				p.word[i+mid] = null;
 
