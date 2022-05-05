@@ -5,7 +5,38 @@ import java.io.FileNotFoundException;
 public class BPlusTree_Tester{
 
 	public static void main(String[] args){
-		printAllTester();
+		searchTester();
+	}
+
+	public static void searchTester(){
+		BPlusTree tree = new BPlusTree(3);
+		fillTree(tree);
+
+		System.out.println(tree.search("aard-wolf"));
+	}
+
+
+	public static void fillTree(BPlusTree t){
+		//Initializes file reader
+		File f = new File("Dataset.tsv");
+		WordNode n;
+
+		try{
+			Scanner scan = new Scanner(f);
+			String line;
+			line = scan.nextLine();  // Reads in the first line of column labels
+			
+			// while(scan.hasNext()){
+			for(int i=0; i<20; i++){
+				line = scan.nextLine();
+				n = new WordNode(line);
+				t.add(n);
+			}
+			scan.close();
+		}
+		catch(FileNotFoundException e){
+			System.out.format("The file was not found.\n");
+		}
 	}
 
 	public static void printAllTester(){

@@ -3,7 +3,7 @@ import java.util.Queue;
 
 public class BPlusTree{
 	private int max;
-	private Bucket root, start;
+	public Bucket root, start;
 
 	public BPlusTree(int max){
 		this.max = max;
@@ -41,6 +41,20 @@ public class BPlusTree{
 		for(Bucket temp=start; temp!=null; temp = temp.right){
 			System.out.println(temp);
 		}
+	}
+
+	// Works
+	public Bucket search(String name){
+		Bucket temp = this.root;
+		name = name.toLowerCase();
+
+		while(!temp.isLeaf()){
+			temp = temp.findNext(name);
+		}
+
+		System.out.format("Returned bucket: %s\n",temp);
+
+		return temp;
 	}
 
 	// Works!
