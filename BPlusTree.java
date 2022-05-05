@@ -119,15 +119,19 @@ public class BPlusTree{
 				System.out.println(root.b[0]);
 			}
 			
+			//adds word at mid index of p to new parent
 			flag = p.parent.insert(p.word[mid], other_p);
+			//if p is an internal bucket, p.word[mid] is deleted
 			if(!p.isLeaf()){
 				p.word[mid] = null;
 			}
 
 			int i = 0;
 
+			//splits internal bucket
 			if(!p.isLeaf()){
 				System.out.print("Splitting internal node");
+				//new bucket's 0 pointer is set equal to 
 				other_p.b[0] = p.b[mid+1];
 				p.b[mid+1] = null;
 				if(other_p.b[0] != null){

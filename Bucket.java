@@ -144,7 +144,7 @@ public class Bucket{
                 return this.b[i];
             }
         }
-        return this.b[this.BSize-1];             // Nate thinks this might point to a null
+        return this.b[this.BSize];             // Nate thinks this might point to a null
     }
 
     // Prints everything for debugging purposes
