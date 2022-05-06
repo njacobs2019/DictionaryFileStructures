@@ -5,7 +5,7 @@ class HashNode extends WordList{
 	public HashNode next;
 
 	public HashNode(String inName){
-		super(inName);
+		super(inName.toLowerCase());
 		next = null;
 	}
 }

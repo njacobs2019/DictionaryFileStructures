@@ -9,18 +9,31 @@ public class HashTable_Tester{
 		// WordNode defn1 = new WordNode("Aback","adv.","Behind; in the rear.");
 		// WordNode defn2 = new WordNode("Aback","adv.","Toward the back or rear; backward.");
 		// WordNode defn3 = new WordNode("Abacus","n.","The uppermost member or division of the capital of a column, immediately under the architrave. See Column.");
-		fillTree(ht);
+		fillTable(ht);
 		// ht.add(defn1);
 		// ht.add(defn2);
 		// ht.add(defn3);s
 
 
+
+		// for(int i=0; i<20; i++){
+		// 	System.out.println(ht.table[i]);
+		// }
+
+		System.out.println(ht.search("a"));
+
+		System.out.println("---------");
+
 		//Search prints out only null values
 		HashNode hn = ht.search("A");
 		System.out.println(hn);
 
+		System.out.println("---------");
+
 		hn = ht.search("a 1");
 		System.out.println(hn);
+
+		System.out.println("---------");
 
 		hn = ht.search("yellow");
 		System.out.println(hn);
@@ -28,7 +41,7 @@ public class HashTable_Tester{
 
 	}
 
-	public static void fillTree(HashTable t){
+	public static void fillTable(HashTable t){
 		//Initializes file reader
 		File f = new File("Dataset.tsv");
 		WordNode n;

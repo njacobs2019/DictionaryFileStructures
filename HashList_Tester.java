@@ -13,12 +13,14 @@ public class HashList_Tester{
 		System.out.format("This hashlist contains %s words\n",hl.length());
 		System.out.println(hl);
 
-		HashNode hn = hl.search("Aback");
+		
 		System.out.println("--------------");
+		HashNode hn = hl.search("Aback");
 		System.out.println(hn);
 
-		hn = hl.search("yellow");
+		
 		System.out.println("--------------");
+		hn = hl.search("yellow");
 		System.out.println(hn);
 	}
 }

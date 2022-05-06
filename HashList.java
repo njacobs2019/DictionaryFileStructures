@@ -36,8 +36,9 @@ class HashList{
 	}
 
 	public HashNode search(String name){
+		name = name.toLowerCase();
 		for(HashNode temp=this.head; temp!=null; temp = temp.next){
-			if(temp.getName()==name){
+			if(temp.getName().equals(name)){
 				// hit
 				return temp;
 			}

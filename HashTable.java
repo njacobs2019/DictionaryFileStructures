@@ -14,12 +14,21 @@ public class HashTable{
 		table = new HashList[size];
 	}
 
+
+	// 
+	public void printAll(){
+
+	}
+
+
 	public HashNode search(String name){
 		// returns null if not found
+		name = name.toLowerCase();
 
 		int index = hash(name);
 
 		if(table[index]==null){
+			System.out.println("Short-circuit");
 			return null;
 		}
 		
