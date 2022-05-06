@@ -10,8 +10,8 @@ public class Main{
 		String line;
 
 		// Initialize tree
-		BPlusTree tree = new BPlusTree(10);
-		HashTable ht = new HashTable(1000);
+		BPlusTree tree = new BPlusTree(20);
+		HashTable ht = new HashTable(300);
 
 		// Counter times
 		long startTree;
@@ -33,7 +33,6 @@ public class Main{
 		System.out.println("Time to fill Hash Table (ms): " + (table_fill));
 
 		// Print Alpha
-
 		System.out.println("\nThis will print the entire B+ tree in alphabetical order");
 		System.out.println("Warning: this will also print the entire hash table in alphabetical order which takes <30 seconds");
 		System.out.print("Ready to print? (press enter)  ");
@@ -116,7 +115,6 @@ public class Main{
 		System.out.println("\n\nTime to search B+ Tree (ms): " + (tree_search));
 		long table_search = endTable-startTable;
 		System.out.println("Time to search Hash Table (ms): " + (table_search));
-
 	}
 
 	public static void fillTree(BPlusTree t){

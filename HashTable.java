@@ -51,17 +51,10 @@ public class HashTable{
 		double quotient = ((double) sigma)/this.size;
 		double sd = Math.pow(quotient,0.5);
 
-		// System.out.format("Num words:  %d\n",num_words);
-		// System.out.format("Num empty buckets:  %d\n",num_empty_buckets);
-		// System.out.format("Average: %d\n",avg_all);
-		// System.out.format("Average non empty buckets: %d\n",avg_full);
-		// System.out.format("SD:  %.3f\n",sd);
-
-		double[] out = {avg_full, sd};
+		double[] out = {avg_full, sd, num_empty_buckets};
 		return out;
 	}
 
-	// Tested!
 	// Prints all HashNodes in the table (not alphabetical)
 	public void printAll(){
 		for(int i=0; i<size; i++){
@@ -74,7 +67,6 @@ public class HashTable{
 		}
 	}
 
-	// Tested!
 	// Returns the next word alphabetically
 	public HashNode findNext(String name){
 		HashNode out = null;
@@ -183,32 +175,32 @@ public class HashTable{
 		return Math.abs(out)%this.size;
 	}
 
-	    public static int compare(String a, String b){
-    	// return 1 if a>b
+	public static int compare(String a, String b){
+		// return 1 if a>b
 		// return 0 if a=b
 		// return -1 if a<b
 
-    	int min = a.length();
+		int min = a.length();
 
-    	if(b.length() < min){
-    		min = b.length();
-    	}
+		if(b.length() < min){
+			min = b.length();
+		}
 
-    	for(int i = 0; i < min; i++){
-    		if(a.charAt(i) < b.charAt(i)){
-    			return -1;
-    		}
-    		if(a.charAt(i) > b.charAt(i)){
-    			return 1;
-    		}
-    	}
+		for(int i = 0; i < min; i++){
+			if(a.charAt(i) < b.charAt(i)){
+				return -1;
+			}
+			if(a.charAt(i) > b.charAt(i)){
+				return 1;
+			}
+		}
 
-    	if(a.length()>b.length()){
-    		return 1;
-    	}
-    	else if(a.length()<b.length()){
-    		return -1;
-    	}
-    	return 0;
-    }
+		if(a.length()>b.length()){
+			return 1;
+		}
+		else if(a.length()<b.length()){
+			return -1;
+		}
+		return 0;
+	}
 }
