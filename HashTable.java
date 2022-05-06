@@ -15,6 +15,7 @@ public class HashTable{
 		table = new HashList[size];
 	}
 
+	// Tested!
 	// Prints all HashNodes in the table (not alphabetical)
 	public void printAll(){
 		for(int i=0; i<size; i++){
@@ -27,8 +28,61 @@ public class HashTable{
 		}
 	}
 
+	// Tested!
+	// Returns the next word alphabetically
+	public HashNode findNext(String name){
+		HashNode out = null;
+		for(int i=0; i<size; i++){
+			if(table[i]!=null){
+				for(HashNode temp=table[i].head; temp!=null; temp=temp.next){
+					if(out==null && compare(temp.getName(),name)==1){
+						out=temp;
+					}
+					else if(compare(temp.getName(),name)==1 && compare(temp.getName(),out.getName())==-1){
+						out=temp;
+					}
+				}
+			}
+		}
+		return out;
+	}
 
+	// Prints out the entire dictionary in alphabetical order
+	// Warning:  extremely slow
+	public void printAllAlpha(){
+		partialPrint("a",10000000,true);
+	}
 
+	// Prints out the definition for the input word if exists
+	// Prints out the next num words after
+	public void partialPrint(String name, int num, Boolean all){
+		HashNode tempNode = search(name);
+		if(tempNode==null){
+			System.out.println("Start word not in dictionary");
+			return;
+		}
+
+		System.out.println(search(name));
+
+		for(int i=0; i<num-1; i++){
+			tempNode = findNext(tempNode.getName());
+
+			if(tempNode==null){
+				if(!all)
+					System.out.println("Hit end of dictionary before printing all.");
+				return;
+			}
+
+			System.out.println(tempNode);
+		}
+	}
+
+	//Over written partialPrint interface
+	public void partialPrint(String name, int num){
+		partialPrint(name,num,false);
+	}
+
+	// Tested!
 	public HashNode search(String name){
 		// returns null if not found
 		name = name.toLowerCase();
@@ -78,4 +132,32 @@ public class HashTable{
 		return Math.abs(out)%this.size;
 	}
 
+	    public static int compare(String a, String b){
+    	// return 1 if a>b
+		// return 0 if a=b
+		// return -1 if a<b
+
+    	int min = a.length();
+
+    	if(b.length() < min){
+    		min = b.length();
+    	}
+
+    	for(int i = 0; i < min; i++){
+    		if(a.charAt(i) < b.charAt(i)){
+    			return -1;
+    		}
+    		if(a.charAt(i) > b.charAt(i)){
+    			return 1;
+    		}
+    	}
+
+    	if(a.length()>b.length()){
+    		return 1;
+    	}
+    	else if(a.length()<b.length()){
+    		return -1;
+    	}
+    	return 0;
+    }
 }

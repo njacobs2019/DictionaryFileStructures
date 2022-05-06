@@ -7,7 +7,26 @@ public class HashTable_Tester{
 	public static void main(String[] args){
 		HashTable ht = new HashTable(100);
 		fillTable(ht);
-		testPrintAll(ht);
+		testPrintAllAlpha(ht);
+	}
+
+	public static void testPrintAllAlpha(HashTable ht){
+		ht.printAllAlpha();
+	}
+
+	public static void testPartialPrint(HashTable ht){
+		ht.partialPrint("butty",10);
+		System.out.println("----");
+		ht.partialPrint("ical",10);
+		System.out.println("----");
+		ht.partialPrint("ical",2);
+	}
+
+	public static void testFindNext(HashTable ht){
+		System.out.println(ht.findNext("butty"));
+		System.out.println(ht.findNext("ical"));
+		System.out.println(ht.findNext("was"));
+		System.out.println(ht.findNext("zebra"));
 	}
 
 	public static void testPrintAll(HashTable ht){
