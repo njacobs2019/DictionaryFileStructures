@@ -73,7 +73,12 @@ public class HashTable{
 				return;
 			}
 
-			System.out.println(tempNode);
+			if(all){
+				System.out.println(tempNode.getName());
+			}
+			else{
+				System.out.println(tempNode);
+			}
 		}
 	}
 
