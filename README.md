@@ -1,7 +1,7 @@
 
 # Dictionary File Structures
 
-This was the final project for UMaine's COS 226, Data Structures and Algorithms class Spring 2022.
+This was the final project for UMaine's COS 226, Data Structures and Algorithms class Spring 2022.<br />
 Nicholas Jacobs and Nate Roberts
 
 ## Running the Program
