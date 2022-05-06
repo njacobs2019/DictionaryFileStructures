@@ -2,7 +2,7 @@
 // It holds HashNodes which contain a single word and all of its definitions.
 
 class HashList{
-	private HashNode head;
+	public HashNode head;
 	private int length;      // how many words are in this linked list
 
 	public HashList(){

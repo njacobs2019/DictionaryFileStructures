@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.lang.Math;
 
 public class HashTable{
+	// Count is 13564
 
 	private HashList[] table;
 	private int size;
@@ -14,11 +15,18 @@ public class HashTable{
 		table = new HashList[size];
 	}
 
-
-	// 
+	// Prints all HashNodes in the table (not alphabetical)
 	public void printAll(){
-
+		for(int i=0; i<size; i++){
+			// Check if null
+			if(table[i]!=null){
+				for(HashNode temp=table[i].head; temp!=null; temp=temp.next){
+					System.out.println(temp);
+				}
+			}
+		}
 	}
+
 
 
 	public HashNode search(String name){
