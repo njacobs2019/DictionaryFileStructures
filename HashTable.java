@@ -13,8 +13,52 @@ public class HashTable{
 	public HashTable(int inSize){
 		size = inSize;
 		table = new HashList[size];
-
 		System.out.format("Hash Table created with array size %d\n",size);
+	}
+
+	public double[] stats(){
+		int num_words=0;
+		int num_empty_buckets=0;
+		int temp_num;
+
+		for(int i=0; i<this.size; i++){
+			if(table[i]==null)
+				temp_num=0;
+			else
+				temp_num = table[i].length();
+
+			num_words += temp_num;
+			if(temp_num==0)
+				num_empty_buckets++;
+		}
+
+		int num_full_buckets = this.size-num_empty_buckets;
+		int avg_all = num_words/this.size;                   // average words per bucket
+		int avg_full = num_words/num_full_buckets;           // average words per non empty bucket
+
+		// Calculating standard deviation of all buckets
+		int sigma = 0;
+
+		for(int i=0; i<this.size; i++){
+			if(table[i]==null)
+				temp_num=0;
+			else
+				temp_num = table[i].length();
+
+			sigma += Math.pow((temp_num-avg_all),2);
+		}
+
+		double quotient = ((double) sigma)/this.size;
+		double sd = Math.pow(quotient,0.5);
+
+		// System.out.format("Num words:  %d\n",num_words);
+		// System.out.format("Num empty buckets:  %d\n",num_empty_buckets);
+		// System.out.format("Average: %d\n",avg_all);
+		// System.out.format("Average non empty buckets: %d\n",avg_full);
+		// System.out.format("SD:  %.3f\n",sd);
+
+		double[] out = {avg_full, sd};
+		return out;
 	}
 
 	// Tested!
@@ -126,7 +170,7 @@ public class HashTable{
 
 	private int calcHash(String name) throws NoSuchAlgorithmException{
 		// Object to do the hashing
-		MessageDigest md = MessageDigest.getInstance("SHA-256");   // also can use MD5 or SHA-1
+		MessageDigest md = MessageDigest.getInstance("SHA-1");   // also can use MD5 or SHA-1
 
 		// Computes the hash
 		byte[] hash1 = md.digest(name.getBytes(StandardCharsets.UTF_8));
