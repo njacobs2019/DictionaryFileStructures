@@ -2,6 +2,9 @@
 
 ![alt text](https://raw.githubusercontent.com/njacobs2019/DictionaryFileStructures/main/Other/TableSize.png)
 
+![alt text](https://raw.githubusercontent.com/njacobs2019/DictionaryFileStructures/main/Other/BucketSize.png)
+
+![alt text](https://raw.githubusercontent.com/njacobs2019/DictionaryFileStructures/main/Other/HashFunctionTune.png)
 
 
 For this project you’ll be comparing the process time of two different styles of data storage. Hash tables and B+ Trees.
