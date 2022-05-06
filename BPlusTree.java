@@ -60,6 +60,26 @@ public class BPlusTree{
 		return null;
 	}
 
+	// This function returns the word and all of its definitions
+	// Returns null if word not found
+	public WordList searchWord(String name){
+		name = name.toLowerCase();
+		Bucket temp = search(name);
+
+		// Check if temp is null
+		if(temp==null){
+			return null;
+		}
+
+		// Find the index where the word is in the bucket
+		for(int index=0; index<temp.BSize; index++){
+			if(temp.word[index].getName().equals(name)){
+				return temp.word[index];
+			}
+		}
+		return null;
+	}
+
 	public void partialPrint(String name, int num){
 		name = name.toLowerCase();
 		Bucket temp = search(name);

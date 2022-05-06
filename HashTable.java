@@ -13,6 +13,8 @@ public class HashTable{
 	public HashTable(int inSize){
 		size = inSize;
 		table = new HashList[size];
+
+		System.out.format("Hash Table created with array size %d\n",size);
 	}
 
 	// Tested!

@@ -29,7 +29,7 @@ public class Main{
 
 		long tree_fill = endTree-startTree;
 		long table_fill = endTable-startTable;
-		System.out.println("Time to fill B+ Tree (ms): " + (tree_fill));
+		System.out.println("\nTime to fill B+ Tree (ms): " + (tree_fill));
 		System.out.println("Time to fill Hash Table (ms): " + (table_fill));
 
 		// Print Alpha
@@ -61,7 +61,7 @@ public class Main{
 
 
 		// Partial Print
-		
+
 		System.out.print("\nReady to partial print the trees for \"butty\" with 10 words? (press enter)  ");
 		line = scan.nextLine();
 
@@ -70,6 +70,8 @@ public class Main{
 		tree.partialPrint("butty",10);
 		endTree = System.currentTimeMillis();
 		
+		System.out.println();
+
 		startTable = System.currentTimeMillis();
 		ht.partialPrint("butty",10);
 		endTable = System.currentTimeMillis();
@@ -80,18 +82,41 @@ public class Main{
 		System.out.println("Time to partial print Hash Table (ms): " + (table_printPartial));
 
 
-
+		// Search both trees
 		
-		System.out.print("\nReady to search for \"butty\"? (press enter)  ");
+		System.out.print("\nReady to search the data structures? (press enter)  ");
 		line = scan.nextLine();
 
+		String[] searches = {"abate","abelian","alien","butty","butyl","was","ical","Aria","Africa","Automatic"};
+
+
+		System.out.print("Searching for:  ");
+		for(int i=0; i<searches.length; i++){
+			System.out.format("[%s]",searches[i]);
+		}
+		System.out.println();
+
 		// Search the tree
+		System.out.println("\nHere is the B+ Tree search:");
 		startTree = System.currentTimeMillis();
-		System.out.println("Here is the bucket containing butty:");
-		System.out.println(tree.search("butty"));
+		for(int i=0; i<searches.length; i++){
+			System.out.println(tree.searchWord(searches[i]));
+		}
 		endTree = System.currentTimeMillis();
+
+		// Search the table
+		System.out.println("\nHere is the Hash Table search:");
+		startTable = System.currentTimeMillis();
+		for(int i=0; i<searches.length; i++){
+			System.out.println(ht.search(searches[i]));
+		}
+		endTable = System.currentTimeMillis();
+
 		long tree_search = endTree-startTree;
 		System.out.println("\n\nTime to search B+ Tree (ms): " + (tree_search));
+		long table_search = endTable-startTable;
+		System.out.println("Time to search Hash Table (ms): " + (table_search));
+
 	}
 
 	public static void fillTree(BPlusTree t){
