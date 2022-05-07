@@ -19,7 +19,7 @@ public class WordList{
 		return this.length;
 	}
 
-	// Note this prepends the LL
+	// Adds a definition to the WordList by prepending the linked list
 	public void add(String pos, String defn){
 		WordNode n = new WordNode(this.name, pos, defn);
 
@@ -34,7 +34,7 @@ public class WordList{
 		this.length++;
 	}
 
-	// Note this prepends the LL
+	// Adds a definition to the WordList by prepending the linked list
 	public void add(WordNode n){
 		//Check if the LL is empty
 		if(this.head==null){
@@ -56,7 +56,6 @@ public class WordList{
 			if(temp.next!=null)
 				out += "\n";
 		}
-
 		return out;
 	}
 }

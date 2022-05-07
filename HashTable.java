@@ -5,8 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.lang.Math;
 
 public class HashTable{
-	// Count is 13564
-
 	private HashList[] table;
 	private int size;
 
@@ -16,6 +14,7 @@ public class HashTable{
 		System.out.format("Hash Table created with array size %d\n",size);
 	}
 
+	// Returns statistics about this.table
 	public double[] stats(){
 		int num_words=0;
 		int num_empty_buckets=0;
@@ -92,7 +91,7 @@ public class HashTable{
 	}
 
 	// Prints out the definition for the input word if exists
-	// Prints out the next num words after
+	// Prints out the next num-1 words after
 	public void partialPrint(String name, int num, Boolean all){
 		HashNode tempNode = search(name);
 		if(tempNode==null){
@@ -125,7 +124,7 @@ public class HashTable{
 		partialPrint(name,num,false);
 	}
 
-	// Tested!
+	// Returns the HashNode containing all the definitions of the word if it exists.
 	public HashNode search(String name){
 		// returns null if not found
 		name = name.toLowerCase();
@@ -140,6 +139,7 @@ public class HashTable{
 		return table[index].search(name);
 	}
 
+	// Adds a word to the HashTable
 	public void add(WordNode n){
 		int index = hash(n.getName());
 
@@ -149,6 +149,7 @@ public class HashTable{
 		table[index].add(n);
 	}
 
+	// Wrapper method for calcHash to catch exceptions.
 	private int hash(String name){
 		int out=-1;
 		try{
@@ -160,6 +161,7 @@ public class HashTable{
 		return out;
 	}	
 
+	// Calculates the index for a given word
 	private int calcHash(String name) throws NoSuchAlgorithmException{
 		// Object to do the hashing
 		MessageDigest md = MessageDigest.getInstance("SHA-1");   // also can use MD5 or SHA-1
@@ -175,7 +177,8 @@ public class HashTable{
 		return Math.abs(out)%this.size;
 	}
 
-	public static int compare(String a, String b){
+	// Compares two strings alphabetically
+	private static int compare(String a, String b){
 		// return 1 if a>b
 		// return 0 if a=b
 		// return -1 if a<b

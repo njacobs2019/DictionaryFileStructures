@@ -11,7 +11,7 @@ public class BPlusTree{
 		System.out.println("B+ tree created with max size " + max);
 	}
 
-	// Works!
+	//  Does a BFS print of the tree
 	public void printBFS(){
 		Queue<Bucket> q = new LinkedList<>();
 		q.add(root);
@@ -29,8 +29,8 @@ public class BPlusTree{
 		}
 	}
 
+	// This function prints the entire dictionary alphabetically
 	public void printAll(){
-		// This function prints the entire dictionary
 		Bucket start = this.root;
 
 		while(start.b[0]!=null){
@@ -42,7 +42,7 @@ public class BPlusTree{
 		}
 	}
 
-	// Works
+	// Returns the leaf bucket containing the word.  If not found, null.
 	public Bucket search(String name){
 		Bucket temp = this.root;
 		name = name.toLowerCase();
@@ -60,7 +60,7 @@ public class BPlusTree{
 		return null;
 	}
 
-	// This function returns the word and all of its definitions
+	// Returns the word and all of its definitions
 	// Returns null if word not found
 	public WordList searchWord(String name){
 		name = name.toLowerCase();
@@ -80,6 +80,7 @@ public class BPlusTree{
 		return null;
 	}
 
+	// If the word is in dictionary, prints it followed by the next n-1 definitions alphabetically.
 	public void partialPrint(String name, int num){
 		name = name.toLowerCase();
 		Bucket temp = search(name);
@@ -115,7 +116,7 @@ public class BPlusTree{
 		}
 	}
 
-	// Works!
+	// Adds a word's definition to the dictionary
 	public void add(WordNode n){
 		if(root == null){
 			root = new Bucket(max);
@@ -138,7 +139,7 @@ public class BPlusTree{
 		}
 	}
 
-	// Works!
+	// Splits a bucket iteratively until no buckets need to be split
 	public void split(Bucket p){
 		int mid;              // Index of middle element
 		Bucket other_p;       // New bucket
@@ -227,6 +228,4 @@ public class BPlusTree{
 			p = p.parent;
 		}
 	}
-
-
 }

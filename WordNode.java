@@ -1,7 +1,7 @@
 public class WordNode{
-	private String name;
-	private String pos;
-	private String definition;
+	private String name;         // The actual word
+	private String pos;          // Part of speech
+	private String definition;   // Definition
 	public WordNode next;
 
 	public WordNode(String inName, String inPos, String inDef){
@@ -11,6 +11,7 @@ public class WordNode{
 		this.next = null;
 	}
 
+	// Overloads the constructor so it can parse file input
 	public WordNode(String input){
 		String[] output;
 		output = input.split("\t");

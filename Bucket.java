@@ -1,3 +1,5 @@
+// This is a bucket for the B+ tree.
+
 public class Bucket{
 	public WordList word[];
 	public Bucket b[];
@@ -21,14 +23,13 @@ public class Bucket{
 		left = null;
 	}
 
+	// Determines if the bucket is a leaf
 	public Boolean isLeaf(){
 		return b[0]==null;
 	}
 
-	// Tested!
+	// Shifts everything to the right including index x
 	public void shiftRight(int x){
-		// shifts everything to the right including index x
-
         for(int i = BSize-1; i >= x; i--){
             word[i+1] = word[i];
             b[i+2] = b[i+1];
@@ -36,11 +37,9 @@ public class Bucket{
         this.BSize++;
     }
 
-	// Tested!
+	// X is equal to the index
+    // Variable at index x is getting writtenover
     public void shiftLeft(int x){
-    	// when shiftleft is called, x is equal to the index
-    	// variable at index x is getting writtenover
-
     	for(int i = x; i < BSize; i++){
     		word[i] = word[i+1];
     		b[i+1] = b[i+2];
@@ -48,7 +47,7 @@ public class Bucket{
     	this.BSize--;
     }
 
-    // Tested!
+    // Compares two strings alphabetically
     public static int compare(String a, String b){
     	// return 1 if a>b
 		// return 0 if a=b
@@ -79,7 +78,7 @@ public class Bucket{
     }
 
     // Only to be called from split function
-    // Tested!
+    // Inserts a wordlist into the bucket
     public Boolean insert(WordList l, Bucket p){
     	for(int i = 0; i <= BSize; i++){
     		// Reaches null, it is end of bucket, insert
@@ -104,7 +103,7 @@ public class Bucket{
     }
 
 
-    // Tested!
+    // Inserts a WordNode (single definition) into the dictionary
     public Boolean insert(WordNode w, Bucket p){
     	for(int i = 0; i <= BSize; i++){
     		// Reaches null, it is end of bucket, insert
@@ -135,10 +134,8 @@ public class Bucket{
     	return (this.BSize == this.max);
     }
 
-    // Tested
+    // Returns the bucket to traverse to next
 	public Bucket findNext(String name){
-		// Returns the bucket to go to next
-
         for(int i=0; i < this.BSize; i++){
             if(compare(name, this.word[i].getName()) == -1){
                 return this.b[i];

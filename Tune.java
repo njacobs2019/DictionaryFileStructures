@@ -8,7 +8,6 @@ public class Tune{
 		tuneTree();
 	}
 
-
 	// This function tunes the bucket size of the tree
 	public static void tuneTree(){
 		BPlusTree tree;
@@ -37,6 +36,7 @@ public class Tune{
 		}
 	}
 
+	// Tunes the table size
 	public static void tuneTable(){
 		HashTable ht;
 		double[] out;

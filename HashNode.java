@@ -1,4 +1,4 @@
-// This is a node in the hashtable's linked lists
+// This is a node in the HashTable's linked lists
 // This node holds a single wordlist i.e. a single word and all of its definitions
 
 class HashNode extends WordList{
